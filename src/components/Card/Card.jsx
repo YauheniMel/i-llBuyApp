@@ -1,33 +1,21 @@
+import { Link } from 'react-router-dom';
+import ROUTES from '../../constants/routes';
 import fetchItem from '../../services/fetchItem';
 import classes from './Card.module.css';
-
-const getItemURL = (id) => `https://api.escuelajs.co/api/v1/products/${id}`;
 
 const Card = ({
   title,
   imageURL,
   price,
   id,
-  dispatch
 }) => {
-  function handleClickGetItem(id) {
-    const itemURL = getItemURL(id);
-
-    fetchItem(itemURL)
-      .then((item) => dispatch({
-        type: 'SET_ITEM',
-        payload: item
-      }))
-      .catch((error) => alert(error))
-      .finally(() => console.log('Fetched'));
-  }
 
   return (
     <div className={classes.wrap}>
       <img src={imageURL} alt="card" />
-      <a onClick={() => handleClickGetItem(id)} href="#">
+      <Link to={`${ROUTES.DetailsLink}${id}`}>
         <h3>{title}</h3>
-      </a>
+      </Link>
       <div className={classes.price}>
         <strong>{price}</strong>
         <span>&#8364;</span>

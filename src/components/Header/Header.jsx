@@ -1,13 +1,15 @@
+import { NavLink } from 'react-router-dom';
+import ROUTES from '../../constants/routes';
 import Basket from '../Basket/Basket';
 import classes from './Header.module.css';
 
 const links = [
   {
-    route: 'home',
+    route: ROUTES.Home,
     title: 'Home'
   },
   {
-    route: 'about',
+    route: ROUTES.About,
     title: 'About'
   },
 ]
@@ -15,11 +17,11 @@ const links = [
 const Header = ({ basketItems }) => {
 
   const list = links.map(link => (
-    <a key={link.route} className={classes.link} href={link.route}>
+    <NavLink key={link.route} className={classes.link} to={link.route}>
       <li key={link.route}>
         {link.title}
       </li>
-    </a>
+    </NavLink>
   ))
 
   return (

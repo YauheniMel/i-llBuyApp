@@ -1,4 +1,9 @@
 import { useReducer } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import ROUTES from './constants/routes';
+import About from './pages/About/About';
+import Home from './pages/Home/Home';
+import Details from './pages/Details/Details';
 import NotFound from './pages/NotFound/NotFound';
 import Root from './pages/Root/Root';
 
@@ -7,23 +12,7 @@ const initialState = {
   name: null,
   surname: null,
   items: [],
-  targetItem: {
-    id: 6,
-    title: 'Intelligent Frozen Chips',
-    price: 708,
-    description:
-      'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support',
-    category: {
-      id: 2,
-      name: 'Electronics',
-      image: 'https://api.lorem.space/image/watch?w=640&h=480&r=8371',
-    },
-    images: [
-      'https://api.lorem.space/image/watch?w=640&h=480&r=4140',
-      'https://api.lorem.space/image/watch?w=640&h=480&r=7259',
-      'https://api.lorem.space/image/watch?w=640&h=480&r=6326',
-    ],
-  },
+  targetItem: {},
   basketItems: [],
 };
 
@@ -39,6 +28,11 @@ const reducer = (state, action) => {
         ...state,
         targetItem: action.payload,
       };
+    case 'CLEAR_TARGET_ITEM':
+      return {
+        ...state,
+        targetItem: {},
+      };
     default:
       return state;
   }
@@ -53,8 +47,17 @@ function App() {
 
   return (
     <div className='App'>
-      <Root state={state} dispatch={dispatch} />
-      {/* <NotFound /> */}
+      <Routes>
+        <Route path={ROUTES.Root} element={<Root state={state} />}>
+          <Route path={ROUTES.Home} element={<Home dispatch={dispatch} items={state.items} />} />
+          <Route path={ROUTES.About} element={<About />} />
+          <Route
+            path={ROUTES.Details}
+            element={<Details item={state.targetItem} dispatch={dispatch} />}
+          />
+        </Route>
+        <Route path={ROUTES.NotFound} element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
