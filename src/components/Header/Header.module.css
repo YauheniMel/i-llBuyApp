@@ -1,0 +1,32 @@
+@import '../../styles/colors.css';
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-main);
+}
+
+.wrap h1 {
+  min-width: 100px;
+}
+
+.wrap nav {
+  flex: 1;
+  max-width: 400px;
+}
+
+.list {
+  display: flex;
+  justify-self: stretch;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  background-color: var(--primary-light);
+}

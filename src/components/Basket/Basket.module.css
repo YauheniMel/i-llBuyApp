@@ -1,0 +1,19 @@
+@import '../../styles/colors.css';
+
+.wrap {
+  position: relative;
+  padding: .3rem;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+
+.wrap span {
+  background-color: var(--white);
+}
+
+.wrap strong {
+  position: absolute;
+  background-color: var(--secondary-main);
+  border-radius: 50%;
+  padding: .3rem;
+}
