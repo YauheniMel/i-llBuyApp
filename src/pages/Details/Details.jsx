@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import fetchItem from '../../services/fetchItem';
 import { useParams } from "react-router-dom";
 import classes from './Details.module.css';
 
-const Details = ({ item, dispatch }) => {
+const Details = ({ isAuth, item, dispatch }) => {
+  const [howMany, setHowMany] = useState(0);
   const params = useParams();
 
   useEffect(() => {
@@ -24,6 +25,28 @@ const Details = ({ item, dispatch }) => {
     }
   }, []);
 
+  function handleChangeHowManyItems({target}) {
+    setHowMany(+target.value);
+  }
+
+  function handleSubmitAddItemsInBasket(e, id) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const payload = {
+      id,
+      howMany: +formData.get('howMany')
+    }
+
+    dispatch({
+      type: 'ADD_ITEM_IN_BASKET',
+      payload
+    })
+
+    setHowMany(0);
+  }
+
   return (
     <section>
       <h2>{item.title}</h2>
@@ -40,12 +63,26 @@ const Details = ({ item, dispatch }) => {
         ))
       }
       <div className={classes.btnWrap}>
-        <form action="">
-          <input type="number" name="" id="" />
-          <button className={classes.button}>
-            Добавить в корзину
-          </button>
-        </form>
+        {
+          isAuth ? (
+            <form action="" onSubmit={(e) => handleSubmitAddItemsInBasket(e, item.id)}>
+              <input
+                type="number"
+                name="howMany"
+                min={0}
+                value={howMany}
+                onChange={handleChangeHowManyItems}
+              />
+              <button className={classes.button}>
+                Добавить в корзину
+              </button>
+            </form>
+          ) : (
+            <span>
+              Чтобы добавить товар в корзину залогинтесь
+            </span>
+          )
+        }
       </div>
     </section>
   )

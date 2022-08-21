@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Slider from '../../components/Slider/Slider';
 import fetchItems from '../../services/fetchItems';
 
-const Home = ({ items, dispatch }) => {
+const Home = ({ isAuth, items, dispatch }) => {
   useEffect(() => {
 
     fetchItems()
@@ -17,7 +17,7 @@ const Home = ({ items, dispatch }) => {
 
   return (
     <section>
-      <Slider items={items} />
+      <Slider isAuth={isAuth} items={items} dispatch={dispatch}/>
     </section>
   )
 }

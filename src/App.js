@@ -9,15 +9,33 @@ import Root from './pages/Root/Root';
 
 const initialState = {
   id: null,
+  isAuth: false,
   name: null,
   surname: null,
   items: [],
   targetItem: {},
-  basketItems: [],
+  basket: [],
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'LOGIN':
+      const { id, name, surname } = action.payload;
+
+      return {
+        ...state,
+        isAuth: true,
+        id,
+        name,
+        surname,
+      };
+    case 'LOGOUT':
+      return {
+        ...state,
+        ...initialState,
+        items: [...state.items],
+        targetItem: { ...state.targetItem },
+      };
     case 'SET_ITEMS':
       return {
         ...state,
@@ -32,6 +50,34 @@ const reducer = (state, action) => {
       return {
         ...state,
         targetItem: {},
+      };
+    case 'ADD_ITEM_IN_BASKET':
+      if (!action.payload.howMany) return { ...state };
+
+      const isItemAlreadyInBasket = state.basket.some((item) => item.id === action.payload.id);
+
+      let basket = [];
+
+      if (isItemAlreadyInBasket) {
+        basket = state.basket.map((item) => {
+          if (item.id === action.payload.id) {
+            return {
+              ...item,
+              howMany: item.howMany + action.payload.howMany,
+            };
+          }
+
+          return item;
+        });
+      } else {
+        const [targetItem] = state.items.filter((item) => item.id === action.payload.id);
+
+        basket = [...state.basket, { ...targetItem, howMany: action.payload.howMany }];
+      }
+
+      return {
+        ...state,
+        basket,
       };
     default:
       return state;
@@ -48,12 +94,15 @@ function App() {
   return (
     <div className='App'>
       <Routes>
-        <Route path={ROUTES.Root} element={<Root state={state} />}>
-          <Route path={ROUTES.Home} element={<Home dispatch={dispatch} items={state.items} />} />
+        <Route path={ROUTES.Root} element={<Root state={state} dispatch={dispatch} />}>
+          <Route
+            path={ROUTES.Home}
+            element={<Home dispatch={dispatch} isAuth={state.isAuth} items={state.items} />}
+          />
           <Route path={ROUTES.About} element={<About />} />
           <Route
             path={ROUTES.Details}
-            element={<Details item={state.targetItem} dispatch={dispatch} />}
+            element={<Details isAuth={state.isAuth} item={state.targetItem} dispatch={dispatch} />}
           />
         </Route>
         <Route path={ROUTES.NotFound} element={<NotFound />} />

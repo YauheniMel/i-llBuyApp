@@ -1,14 +1,27 @@
 import { Link } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
-import fetchItem from '../../services/fetchItem';
 import classes from './Card.module.css';
 
 const Card = ({
+  isAuth,
   title,
   imageURL,
   price,
   id,
+  dispatch
 }) => {
+
+  function handleAddItemInBasket(id) {
+    const payload = {
+      id,
+      howMany: 1
+    }
+
+    dispatch({
+      type: 'ADD_ITEM_IN_BASKET',
+      payload
+    })
+  }
 
   return (
     <div className={classes.wrap}>
@@ -20,7 +33,13 @@ const Card = ({
         <strong>{price}</strong>
         <span>&#8364;</span>
       </div>
-      <button>Добавить в корзину</button>
+      {
+        isAuth ? (
+          <button onClick={() => handleAddItemInBasket(id)}>Добавить в корзину</button>
+        ) : (
+          <span>Чтобы добавить товар в корзину залогинтесь</span>
+        )
+      }
     </div>
   )
 }

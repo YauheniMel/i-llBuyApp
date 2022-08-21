@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
+import AuthModal from '../AuthModal/AuthModal';
 import Basket from '../Basket/Basket';
 import classes from './Header.module.css';
 
@@ -14,7 +16,16 @@ const links = [
   },
 ]
 
-const Header = ({ basketItems }) => {
+const Header = ({ isAuth, name, surname, basket, dispatch }) => {
+  const [ isShowModal, setIsShowModal ] = useState(false);
+
+  function handleClickOpenModal() {
+    setIsShowModal(true);
+  }
+
+  function handleClickLogOut() {
+    dispatch({ type: 'LOGOUT' })
+  }
 
   const list = links.map(link => (
     <NavLink key={link.route} className={classes.link} to={link.route}>
@@ -32,8 +43,23 @@ const Header = ({ basketItems }) => {
           {list}
         </ul>
       </nav>
-      <Basket items={basketItems} />
-      <button>Авторизация</button>
+      {
+        isAuth && (
+          <Basket items={basket} />
+        )
+      }
+      {
+        isAuth ? (
+        <>
+          <span>{name}</span>
+          <span>{surname}</span>
+          <button onClick={handleClickLogOut}>Выйти</button>
+        </>
+        ): (
+          <button onClick={handleClickOpenModal}>Войти</button>
+        )
+      }
+      {isShowModal && <AuthModal dispatch={dispatch} setIsShowModal={setIsShowModal}/>}
     </div>
   )
 }
