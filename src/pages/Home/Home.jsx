@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Slider from '../../components/Slider/Slider';
 import fetchItems from '../../services/fetchItems';
 
-const Home = ({ isAuth, items, dispatch }) => {
+const Home = ({ isAuth, items, dispatch, setError }) => {
   useEffect(() => {
 
     fetchItems()
@@ -10,7 +10,7 @@ const Home = ({ isAuth, items, dispatch }) => {
         type: 'SET_ITEMS',
         payload: items
       }))
-      .catch((error) => alert(error))
+      .catch((error) => setError(error.message))
       .finally(() => console.log('Fetched'));
 
   }, []);

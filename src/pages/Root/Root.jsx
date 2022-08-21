@@ -12,7 +12,7 @@ const Root = ({ state, dispatch }) => {
         basket={state.basket}
         dispatch={dispatch}
       />
-      <Outlet />
+        <Outlet />
     </>
   )
 }

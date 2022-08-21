@@ -5,5 +5,7 @@ export default async function fetchItem(id) {
 
   const response = await fetch(itemURL);
 
+  if (!response.ok) throw new Error('Error: ' + response.statusText);
+
   return response.json();
 }

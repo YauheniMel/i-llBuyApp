@@ -3,7 +3,7 @@ import fetchItem from '../../services/fetchItem';
 import { useParams } from "react-router-dom";
 import classes from './Details.module.css';
 
-const Details = ({ isAuth, item, dispatch }) => {
+const Details = ({ isAuth, item, dispatch, setError }) => {
   const [howMany, setHowMany] = useState(0);
   const params = useParams();
 
@@ -15,7 +15,7 @@ const Details = ({ isAuth, item, dispatch }) => {
           payload: item
         })
       })
-      .catch((error) => alert(error))
+      .catch((error) => setError(error.message))
       .finally(() => console.log('Fetched'));
 
     return () => {

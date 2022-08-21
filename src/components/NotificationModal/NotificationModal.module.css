@@ -1,0 +1,84 @@
+@import '../../styles/colors.css';
+
+.wrap {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 10px;
+  min-width: 300px;
+  margin: .7rem;
+  /* animation: pop-up 3.8s linear; */
+  background-color: var(--primary-main);
+}
+
+.wrap:hover {
+  animation-play-state: paused;
+}
+
+.wrap span {
+  flex: 1;
+  color: var(--black);
+  padding: 1rem .7rem;
+}
+
+.wrap svg {
+  transform: rotate(-90deg);
+}
+
+.timer {
+  stroke-width: 8px;
+  fill: transparent;
+  stroke-dashoffset: 200;
+  animation: timer 15s linear .5s;
+}
+
+.wrap:hover .timer {
+  animation-play-state: paused;
+}
+
+.button {
+  align-self: flex-start;
+}
+
+.button:hover {
+  background-color: var(--primary-main);
+  color: var(--white);
+}
+
+@keyframes timer {
+  0% {
+    stroke-dasharray: 200 0;
+    stroke: var(--white);
+  }
+  100% {
+    stroke-dasharray: 200 189;
+    stroke: var(--primary-light);
+  }
+}
+/*
+@keyframes pop-up {
+  0% {
+    right: -200%;
+  }
+  10% {
+    right: 4%;
+  }
+  12% {
+    right: 0;
+  }
+  14% {
+    right: 0;
+  }
+  95% {
+    right: 0;
+  }
+  97% {
+    right: 3%;
+  }
+  100% {
+    right: -200%;
+  }
+} */

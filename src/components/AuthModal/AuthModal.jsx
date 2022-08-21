@@ -6,8 +6,8 @@ import classes from './AuthModal.module.css';
 
 const AuthModal = ({setIsShowModal, dispatch}) => {
   const [ formData, setFormData ] = useState({
-    login: '',
-    password: '',
+    login: 'login',
+    password: 'password',
     isValid: true,
   });
 
@@ -50,7 +50,7 @@ const AuthModal = ({setIsShowModal, dispatch}) => {
       password: ''
     });
 
-    return navigate(ROUTES.Home);
+    return navigate(ROUTES.Root);
   }
 
   return (
