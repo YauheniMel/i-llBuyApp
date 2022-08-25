@@ -16,24 +16,38 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--white);
-  padding: 2rem;
+  min-width: 320px;
+  width: 60%;
+  max-width: 600px;
 }
 
 .wrap form {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
-  max-width: 600px;
-  min-width: 300px;
+  row-gap: 2rem;
+  padding: 3rem 1rem 1rem 1rem;
 }
 
 .input {
-  width: 100%;
   padding: .5rem .7rem;
+  font-size: 100%;
+  border: 1px solid var(--black);
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .closeBtn {
   position: absolute;
   top: 0;
   right: 0;
+  margin-left: 0;
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action button:not(:last-child) {
+  margin-left: 1rem;
 }

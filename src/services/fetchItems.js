@@ -1,9 +1,11 @@
-const url = 'https://api.escuelajs.co/api/v1/products';
+const getItemURL = (page) => `https://fakestoreapi.com/products?limit=${page}`;
 
-export default async function fetchItems() {
+export default async function fetchItems(page = 1) {
+  const PAGE_SIZE = 10;
+
+  const url = getItemURL(page * PAGE_SIZE);
+
   const response = await fetch(url);
 
-  if (!response.ok) throw new Error('Error: ' + response.statusText);
-
-  return response.json();
+  return await response.json();
 }

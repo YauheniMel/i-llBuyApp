@@ -1,6 +1,32 @@
+@import '../../styles/colors.css';
+
+.section {
+  display: flex;
+}
+
 .btnWrap {
   position: fixed;
   bottom: 0;
   right: 0;
   margin: 1rem;
+}
+
+.btnWrap form {
+  display: flex;
+}
+
+.input {
+  outline: none;
+  border: 1px solid var(--primary-light);
+  width: 70px;
+  padding-left: .7rem;
+  font-size: 100%;
+}
+
+.description p {
+  font-size: 1.2rem;
+}
+
+.image {
+  width: 300px;
 }

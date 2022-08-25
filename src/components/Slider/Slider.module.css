@@ -1,4 +1,68 @@
+@import '../../styles/colors.css';
+
 .wrap {
+  position: relative;
+  height: 100%;
+}
+
+.action {
+  position: absolute;
+  height: 100%;
+  right: 0;
   display: flex;
-  overflow-x: auto;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.action button {
+  padding: 2rem 1rem;
+  z-index: 20;
+  width: 50px;
+}
+
+.target {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2rem;
+  position: relative;
+  height: inherit;
+  background: linear-gradient(90deg, var(--white) 47%, transparent);
+  z-index: 2;
+}
+
+.btn_add {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  margin: 2rem 4rem;
+  z-index: 6;
+}
+
+.price {
+  display: inline-block;
+  background-color: var(--black);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.target_title {
+  font-size: 2rem;
+}
+
+.back {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

@@ -1,13 +1,16 @@
 @import '../../styles/colors.css';
 
 .wrap {
+  position: relative;
   max-height: 300px;
-  /* need to delete */
-  overflow: hidden;
-  /*  */
-  max-width: 250px;
   min-width: 150px;
-  border: 1px solid var(--black);
+  margin: .5rem 1rem;
+  overflow-y: auto;
+}
+
+.wrap:hover {
+  transform: scale(1.1);
+  transition-duration: .3s;
 }
 
 .wrap img {
@@ -15,5 +18,13 @@
 }
 
 .price {
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: var(--white);
+}
+
+.link {
+  font-size: .8rem;
+  text-decoration: underline;
 }
