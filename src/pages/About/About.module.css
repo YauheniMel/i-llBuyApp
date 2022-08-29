@@ -1,0 +1,28 @@
+@import '../../styles/colors.css';
+
+.section {
+  background-color: var(--primary-main);
+  color: var(--black);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.info {
+  padding: 2rem 0;
+  width: 60%;
+  min-width: 300px;
+}
+
+.info h2 {
+  font-size: 2rem;
+  padding: .3rem .7rem;
+}
+
+.info p {
+  text-align: justify;
+  text-indent: 1.5rem;
+  line-height: 2;
+}

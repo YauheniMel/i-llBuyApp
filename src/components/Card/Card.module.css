@@ -1,9 +1,14 @@
 @import '../../styles/colors.css';
+@import '../../styles/shadows.css';
 
 .wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 10px;
   position: relative;
   max-height: 300px;
-  min-width: 150px;
+  min-width: 230px;
   margin: .5rem 1rem;
   overflow-y: auto;
 }
@@ -11,6 +16,8 @@
 .wrap:hover {
   transform: scale(1.1);
   transition-duration: .3s;
+  background-color: var(--gray);
+  box-shadow: var(--shadow);
 }
 
 .wrap img {
@@ -27,4 +34,9 @@
 .link {
   font-size: .8rem;
   text-decoration: underline;
+  text-decoration: none;
+}
+
+.link:hover {
+  background-color: var(--white);
 }

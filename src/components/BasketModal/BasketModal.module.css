@@ -1,0 +1,72 @@
+@import '../../styles/colors.css';
+
+table {
+  position: absolute;
+  bottom:0;
+  left: 0;
+  width: 50vw;
+  border: 1px solid var(--gray);
+  background-color: var(--white);
+  border-collapse: collapse;
+  transform: translateY(calc(2px + 100%));
+}
+
+
+th {
+  font-size: var(--black);
+  font-weight: bold;
+  padding: .3em .7rem;
+}
+
+td, th {
+  text-overflow: ellipsis;
+  border: 1px solid var(--primary-main);
+}
+
+tbody {
+  max-height: 300px;
+  overflow: auto;
+}
+
+tbody > :nth-child(even) {
+  background-color: var(--gray);
+}
+
+.table_placeholder {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1rem;
+}
+
+.action strong {
+  font-size: 1.4rem;
+}
+
+.close_btn {
+  width: 100%;
+  font-size: .7rem;
+  padding: .3rem 0;
+}
+
+.pay_btn {
+  background-color: var(--white);
+  margin-left: 20px;
+}
+
+.pay_btn:disabled {
+  cursor: default;
+  outline: none;
+  color: var(--gray);
+  background-color: transparent;
+}
+
+.pay_btn:disabled:active {
+  background-color: var(--white);
+}

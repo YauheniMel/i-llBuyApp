@@ -1,28 +1,32 @@
 import { Link } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 import classes from './Card.module.css';
+import { useDispatch } from 'react-redux';
+import { basketActionsType } from '../../store/actions/basket';
 
-const Card = ({ isAuth, title, imageURL, price, id, dispatch, setTargetCard }) => {
+const Card = ({ isAuth, item, setTargetCard }) => {
+  const dispatch = useDispatch();
+
   function handleAddItemInBasket(id) {
     const payload = {
-      id,
+      ...item,
       howMany: 1,
     };
 
     dispatch({
-      type: 'SET_ITEM_IN_BASKET',
+      type: basketActionsType.ADD_ITEM_IN_BASKET,
       payload,
     });
   }
 
   return (
-    <div className={classes.wrap} onClick={() => setTargetCard(id)}>
-      <img src={imageURL} alt='card' />
-      <Link className={classes.link} to={`${ROUTES.DetailsLink}${id}`}>
-        <h3>{title}</h3>
+    <div className={classes.wrap} onClick={() => setTargetCard(item.id)}>
+      <img src={item.image} alt='card' />
+      <Link className={classes.link} to={`${ROUTES.DetailsLink}${item.id}`}>
+        <h3>{item.title}</h3>
       </Link>
       <div className={classes.price}>
-        <strong>{price}</strong>
+        <strong>{item.price}</strong>
         <span>&#8364;</span>
       </div>
       {isAuth ? (
@@ -30,7 +34,7 @@ const Card = ({ isAuth, title, imageURL, price, id, dispatch, setTargetCard }) =
           onClick={(e) => {
             e.stopPropagation();
 
-            handleAddItemInBasket(id);
+            handleAddItemInBasket(item.id);
           }}
         >
           Добавить в корзину

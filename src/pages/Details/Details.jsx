@@ -1,43 +1,35 @@
 import { useEffect, useState } from 'react';
-import fetchItem from '../../services/fetchItem';
 import { useParams } from 'react-router-dom';
 import classes from './Details.module.css';
+import { ADD_ITEM_IN_BASKET } from '../../store/actions/basket';
+import { fetchItemByIdThunk, shopActionsType } from '../../store/actions/shop';
+import { getShopHttpErrorSelector, getShopTargetItemSelector } from '../../store/selectors/shop';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserIsAuthSelector } from '../../store/selectors/user';
 
-const Details = ({ isAuth, item, dispatch }) => {
+const Details = () => {
   const [howMany, setHowMany] = useState(0);
-  const [error, setError] = useState(null);
 
-  if (error) {
-    throw new Error(error);
-  }
+  const dispatch = useDispatch();
+
+  const item = useSelector(getShopTargetItemSelector);
+  const isAuth = useSelector(getUserIsAuthSelector);
+  const errorMsg = useSelector(getShopHttpErrorSelector);
 
   const params = useParams();
 
   useEffect(() => {
-    dispatch({
-      type: 'SET_IS_FETCHING',
-    });
+    if (errorMsg) {
+      throw new Error(errorMsg);
+    }
+  }, [errorMsg]);
 
-    (async () => {
-      try {
-        const item = await fetchItem(params.id);
-
-        dispatch({
-          type: 'SET_ITEM',
-          payload: item,
-        });
-      } catch (err) {
-        setError(err);
-      } finally {
-        dispatch({
-          type: 'SET_IS_NOT_FETCHING',
-        });
-      }
-    })();
+  useEffect(() => {
+    dispatch(fetchItemByIdThunk(params.id));
 
     return () => {
       dispatch({
-        type: 'CLEAR_TARGET_ITEM',
+        type: shopActionsType.CLEAR_TARGET_ITEM,
       });
     };
   }, []);
@@ -46,18 +38,18 @@ const Details = ({ isAuth, item, dispatch }) => {
     setHowMany(+target.value);
   }
 
-  function handleSubmitAddItemsInBasket(e, id) {
+  function handleSubmitAddItemsInBasket(e) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
 
     const payload = {
-      id,
+      ...item,
       howMany: +formData.get('howMany'),
     };
 
     dispatch({
-      type: 'SET_ITEM_IN_BASKET',
+      type: ADD_ITEM_IN_BASKET,
       payload,
     });
 

@@ -4,15 +4,9 @@ import { Outlet } from 'react-router-dom';
 import classes from './Root.module.css';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
-const Root = ({ state, dispatch }) => (
+const Root = () => (
   <div className={classes.wrap}>
-    <Header
-      isAuth={state.isAuth}
-      name={state.name}
-      surname={state.surname}
-      basket={state.basket}
-      dispatch={dispatch}
-    />
+    <Header />
     <ErrorBoundary>
       <Outlet />
     </ErrorBoundary>

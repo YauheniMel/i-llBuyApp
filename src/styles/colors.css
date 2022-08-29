@@ -1,7 +1,9 @@
 :root {
   --primary-main: #a1bcd4;
   --primary-light: #E1DCE0;
-  --secondary-main: #CEAD6D;
+  --secondary-main: #cead6d;
+  --secondary-main-rgb: 207, 174, 110;
   --black: #1c3f50;
   --white: #ffffff;
+  --gray: #c9c9c9;
 }

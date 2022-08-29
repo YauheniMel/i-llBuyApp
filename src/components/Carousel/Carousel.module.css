@@ -1,11 +1,3 @@
-.wrap {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  z-index: 5;
-}
-
 .carousel {
   position: absolute;
   bottom: 0;
@@ -15,8 +7,8 @@
   overflow-x: scroll;
   scroll-behavior: smooth;
   backdrop-filter: blur(5px);
-  z-index: 6;
-  padding: 1rem 1px;
+  z-index: 7;
+  padding: 2rem 0;
 }
 
 .show {
@@ -29,11 +21,4 @@
   transition-duration: .5s;
   overflow: hidden;
   backdrop-filter: blur(0px);
-}
-
-.btn {
-  position: sticky;
-  left: 0;
-  min-width: 50px;
-  z-index: 10;
 }

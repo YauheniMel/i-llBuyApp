@@ -1,0 +1,41 @@
+@import '../../styles/colors.css';
+
+.wrap {
+  width: 60%;
+  min-width: 300px;
+  align-self: end;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  border-bottom: 1px solid var(--secondary-main);
+}
+
+.tab {
+  font-size: 1.2rem;
+  padding: .3rem 1.5rem;
+}
+
+.tab {
+  cursor: pointer;
+}
+
+.tab:hover {
+  text-decoration: underline;
+}
+
+.active {
+  background-color: var(--secondary-main);
+  color: var(--white);
+}
+
+.contacts {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.contacts span {
+  font-size: 1.4rem;
+}

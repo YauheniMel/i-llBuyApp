@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from '../Carousel/Carousel';
+import { useDispatch, useSelector } from 'react-redux';
+import { getShopItemsSelector } from '../../store/selectors/shop';
+import { basketActionsType } from '../../store/actions/basket';
 import classes from './Slider.module.css';
+import { Link } from 'react-router-dom';
+import ROUTES from '../../constants/routes';
+import Button from '../Button/Button';
 
-const Slider = ({ items, dispatch, ...rest }) => {
+const Slider = ({ setPage, page, isAuth }) => {
   const [targetCard, setTargetCard] = useState(null);
   const [position, setPosition] = useState(0);
 
+  const dispatch = useDispatch();
+  const items = useSelector(getShopItemsSelector);
+
   useEffect(() => {
-    setTargetCard(items[position]);
+    if (items) {
+      setTargetCard(items[position]);
+    }
   }, [items]);
 
   function handleClickSetNextItem() {
@@ -28,14 +39,14 @@ const Slider = ({ items, dispatch, ...rest }) => {
     setPosition(previousPosition);
   }
 
-  function handleAddItemInBasket(id) {
+  function handleAddItemInBasket() {
     const payload = {
-      id,
+      ...targetCard,
       howMany: 1,
     };
 
     dispatch({
-      type: 'SET_ITEM_IN_BASKET',
+      type: basketActionsType.ADD_ITEM_IN_BASKET,
       payload,
     });
   }
@@ -43,34 +54,42 @@ const Slider = ({ items, dispatch, ...rest }) => {
     targetCard && (
       <div className={classes.wrap}>
         <div className={classes.action}>
-          <button onClick={handleClickSetNextItem}>&and;</button>
-          <button onClick={handleClickSetPreviousItem}>&or;</button>
+          <Button handleOnClick={handleClickSetNextItem}>
+            <img src='assets/icons/up.svg' alt='up-arrow' />
+          </Button>
+          <Button handleOnClick={handleClickSetPreviousItem}>
+            <img src='assets/icons/down.svg' alt='down-arrow' />
+          </Button>
         </div>
-        {rest.isAuth && (
-          <button onClick={() => handleAddItemInBasket(targetCard.id)} className={classes.btn_add}>
-            +
-          </button>
+        {isAuth && (
+          <div className={classes.btn_add}>
+            <Button circle handleOnClick={handleAddItemInBasket}>
+              <img src='assets/icons/add.svg' alt='down-arrow' />
+            </Button>
+          </div>
         )}
-
         <div className={classes.target}>
           <div className={classes.price}>
             <strong>{targetCard.price}</strong>
             <span>&#8364;</span>
           </div>
-          <h2 className={classes.target_title}>{targetCard.title}</h2>
+          <Link className={classes.link} to={`${ROUTES.DetailsLink}${targetCard.id}`}>
+            <h2 className={classes.target_title}>{targetCard.title}</h2>
+          </Link>
         </div>
         <div
           className={classes.back}
           style={{
             backgroundImage: `url(${targetCard.image})`,
           }}
-        ></div>
+        />
         <Carousel
-          items={items}
-          dispatch={dispatch}
           setPosition={setPosition}
           setTargetCard={setTargetCard}
-          {...rest}
+          setPage={setPage}
+          page={page}
+          isAuth={isAuth}
+          items={items}
         />
       </div>
     )

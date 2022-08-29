@@ -1,17 +1,9 @@
 import { useState } from 'react';
 import Card from '../../components/Card/Card';
+import Button from '../Button/Button';
 import classes from './Carousel.module.css';
 
-const Carousel = ({
-  isAuth,
-  items,
-  dispatch,
-  setError,
-  setPage,
-  page,
-  setPosition,
-  setTargetCard,
-}) => {
+const Carousel = ({ isAuth, setPage, page, setPosition, setTargetCard, items }) => {
   const [isHiddenCarousel, setIsHiddenCarousel] = useState(true);
 
   const classValue = isHiddenCarousel ? 'hide' : 'show';
@@ -38,35 +30,18 @@ const Carousel = ({
   }
 
   return (
-    <>
-      <div
-        className={classes.wrap}
-        onClick={() => {
-          setIsHiddenCarousel(true);
-        }}
-      ></div>
-      <div
-        className={`${classes.carousel} ${classes[classValue]}`}
-        onScroll={handleScrollChangePage}
-      >
-        <button className={classes.btn} onClick={() => setIsHiddenCarousel(!isHiddenCarousel)}>
-          {isHiddenCarousel ? '<' : '>'}
-        </button>
-        {items.map((item) => (
-          <Card
-            isAuth={isAuth}
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            imageURL={item.image}
-            price={item.price}
-            dispatch={dispatch}
-            setTargetCard={handleSetTargetCard}
-            setError={setError}
-          />
-        ))}
-      </div>
-    </>
+    <div className={`${classes.carousel} ${classes[classValue]}`} onScroll={handleScrollChangePage}>
+      <Button position={'sticky'} handleOnClick={() => setIsHiddenCarousel(!isHiddenCarousel)}>
+        {isHiddenCarousel ? (
+          <img src='assets/icons/left.svg' alt='left-arrow' />
+        ) : (
+          <img src='assets/icons/right.svg' alt='right-arrow' />
+        )}
+      </Button>
+      {items.map((item) => (
+        <Card isAuth={isAuth} key={item.id} item={item} setTargetCard={handleSetTargetCard} />
+      ))}
+    </div>
   );
 };
 

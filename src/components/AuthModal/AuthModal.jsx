@@ -3,13 +3,17 @@ import ROUTES from '../../constants/routes';
 import { useNavigate } from 'react-router-dom';
 import login from '../../services/login';
 import classes from './AuthModal.module.css';
+import { useDispatch } from 'react-redux';
+import { userActionsType } from '../../store/actions/user';
 
-const AuthModal = ({ setIsShowModal, dispatch }) => {
+const AuthModal = ({ setIsShowModal }) => {
   const [formData, setFormData] = useState({
     login: 'login',
     password: 'password',
     isValid: true,
   });
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -39,7 +43,7 @@ const AuthModal = ({ setIsShowModal, dispatch }) => {
     }
 
     dispatch({
-      type: 'LOGIN',
+      type: userActionsType.LOGIN,
       payload: user,
     });
 
@@ -55,7 +59,7 @@ const AuthModal = ({ setIsShowModal, dispatch }) => {
 
   return (
     <>
-      <div className={classes.back}></div>
+      <div className={classes.back} />
       <div className={classes.wrap}>
         <form action='' onSubmit={handleSubmitLoginUser}>
           <input

@@ -1,0 +1,64 @@
+@import '../../styles/colors.css';
+
+td:not(:first-of-type) {
+  text-align: center;
+}
+
+.title {
+  padding-left: .3rem;
+  overflow: hidden;
+}
+
+.howMany {
+  display: inline-block;
+  position: relative;
+}
+
+.howMany span {
+  background-color:var(--black);
+  height: 1.7rem;
+  color: var(--white);
+}
+
+.input {
+  text-align: center;
+  border: 1px solid var(--black);
+  width: 70px;
+  padding-left: 15px;
+  height: 1.5rem;
+  outline: none;
+  pointer-events: none;
+}
+
+.decrease,
+.increase {
+  position: absolute;
+  top: 0;
+  width: 1.5rem;
+  cursor: pointer;
+  background-color: var(--white);
+}
+
+.decrease:hover,
+.increase:hover {
+  outline: 1px solid var(--black);
+  background-color: var(--gray);
+}
+
+.decrease {
+  left: 0;
+}
+
+.increase {
+  right: 0;
+}
+
+.del_btn {
+  text-transform: lowercase;
+}
+
+.del_btn:hover {
+  background-color: transparent;
+  text-decoration: underline;
+}
+

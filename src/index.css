@@ -35,7 +35,7 @@ button {
   cursor: pointer;
   padding: .7rem;
   color: var(--black);
-  background-color: var(--primary-light);
+  background-color: transparent;
 }
 
 input {
@@ -43,10 +43,6 @@ input {
 }
 
 button:hover {
-  outline: 1px solid var(--secondary-main);
-}
-
-button:active {
   background-color: var(--secondary-main);
 }
 
